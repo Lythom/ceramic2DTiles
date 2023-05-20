@@ -1,0 +1,11 @@
+{
+    "window.title": "${activeEditorShort} — ceramic2DTiles",
+    "search.exclude": {
+        "**/.git": true,
+        "**/node_modules": true,
+        "**/tmp": true,
+        "**/out": true
+    },
+    "haxe.executable": "C:/Users/samue/ceramic/tools/haxe.cmd",
+    "haxelib.executable": "C:/Users/samue/ceramic/tools/haxelib.cmd"
+}
