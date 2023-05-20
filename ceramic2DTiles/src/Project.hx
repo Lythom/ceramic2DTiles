@@ -12,6 +12,8 @@ enum abstract PlayerInput(Int) {
 	var DOWN;
 	var UP;
 	var JUMP;
+	var ROTATE_CLOCKWISE;
+	var ROTATE_COUNTER_CLOCKWISE;
 }
 
 class Project extends Entity {
@@ -53,12 +55,16 @@ class Project extends Entity {
 		inputMap.bindKeyCode(DOWN, DOWN);
 		inputMap.bindKeyCode(UP, UP);
 		inputMap.bindKeyCode(JUMP, SPACE);
+		inputMap.bindKeyCode(ROTATE_COUNTER_CLOCKWISE, LCTRL);
+		inputMap.bindKeyCode(ROTATE_CLOCKWISE, KP_0);
 		// We use scan code for these so that it
 		// will work with non-qwerty layouts as well
 		inputMap.bindScanCode(RIGHT, KEY_D);
 		inputMap.bindScanCode(LEFT, KEY_A);
 		inputMap.bindScanCode(DOWN, KEY_S);
 		inputMap.bindScanCode(UP, KEY_W);
+		inputMap.bindScanCode(ROTATE_COUNTER_CLOCKWISE, KEY_Q);
+		inputMap.bindScanCode(ROTATE_CLOCKWISE, KEY_E);
 
 		// Bind gamepad
 		//
@@ -71,5 +77,7 @@ class Project extends Entity {
 		inputMap.bindGamepadButton(DOWN, DPAD_DOWN);
 		inputMap.bindGamepadButton(UP, DPAD_UP);
 		inputMap.bindGamepadButton(JUMP, A);
+		inputMap.bindGamepadButton(ROTATE_COUNTER_CLOCKWISE, L1);
+		inputMap.bindGamepadButton(ROTATE_CLOCKWISE, R1);
 	}
 }

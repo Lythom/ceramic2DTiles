@@ -6,13 +6,17 @@ import entities.Character;
 import ceramic.Scene;
 
 using ceramic.TilemapPlugin;
+using ceramic.VisualTransition;
 
 class MainScene extends Scene {
 	var ldtkName = Tilemaps.LEVEL;
 	var levelView:LevelView = null;
 	var player:Character;
 	var camera:Camera;
+
 	@observe var speed:Float = 2.5;
+	@observe var playerWorldX:Float = 50;
+	@observe var playerWorldY:Float = 50;
 
 	override function preload() {
 		assets.watchDirectory();
@@ -45,10 +49,29 @@ class MainScene extends Scene {
 
 	override function update(delta:Float) {
 		if (player != null)
-			player.update(delta);
+			player.update(delta, levelView.orientation);
 
 		if (levelView != null)
-			levelView.update(delta, player);
+			levelView.update(delta, player, levelView.orientation);
+
+		if (Project.inputMap.justPressed(ROTATE_CLOCKWISE)) {
+			levelView.orientation = switch levelView.orientation {
+				case North: West;
+				case South: East;
+				case West: South;
+				case East: North;
+			};
+			levelView.redraw(levelView.orientation);
+		}
+		if (Project.inputMap.justPressed(ROTATE_COUNTER_CLOCKWISE)) {
+			levelView.orientation = switch levelView.orientation {
+				case North: East;
+				case South: West;
+				case West: North;
+				case East: South;
+			};
+			levelView.redraw(levelView.orientation);
+		}
 	}
 
 	function initCamera() {
@@ -58,11 +81,12 @@ class MainScene extends Scene {
 		// We tweak some camera settings to make it work
 		// better with our low-res pixel art display
 		// camera.movementThreshold = 25;
-		camera.trackSpeedX = 80;
+		camera.trackSpeedX = 200;
+		camera.trackSpeedY = 200;
 		camera.trackCurve = 0.3;
 		camera.clampToContentBounds = false;
-		camera.deadZoneX = 0.05;
-		camera.deadZoneY = 0.05;
+		camera.deadZoneX = 0;
+		camera.deadZoneY = 0;
 		// camera.brakeNearBounds(0, 0);
 
 		// We update the camera after everything else has been updated

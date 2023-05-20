@@ -40,7 +40,7 @@ class Cell {
 
 class BlockDefinition {
 	public static var AIR:BlockDefinition = create(-1);
-	public static var ALL:Array<BlockDefinition> = [AIR, create(55), create(5), create(20)];
+	public static var ALL:Array<BlockDefinition> = [AIR, create(55), create(5), create(19)];
 
 	public var tilesetIndex:Int;
 	public var miningLevel:Int;
